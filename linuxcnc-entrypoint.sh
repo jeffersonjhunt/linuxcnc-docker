@@ -26,35 +26,16 @@ function debug() {
   fi
 }
 
-# stop shinysdr
+# stop linuxcnc
 function stop() {
-    debug "stopping shinysdr"
-    killall shinysdr
+  debug "stopping linuxcnc"
+  killall linuxcnc
 }
 
-# start shinysdr
+# start linuxcnc
 function start() {
-    __CONFIG=${1:-/config}
-    if [[ "${__INIT}" -eq "1" ]]; then        
-        init ${__CONFIG}
-    fi
-    debug "starting with config: ${__CONFIG}"
-    shinysdr ${__CONFIG}
-}
-
-# init config for shinysdr
-function init() {
-    __CONFIG=${1:-/config}
-    debug "initalizing config: ${__CONFIG}"
-    if [[ "${__FORCE}" -eq "1" ]]; then
-        debug "removing old config: ${__CONFIG}"
-        rm -rf ${__CONFIG}
-    elif [[ -f "${__CONFIG}/config.py" ]]; then
-        echoerr "${__CONFIG} exists, remove or use --force"
-        exit 255
-    fi
-    debug "creating new config: ${__CONFIG}"
-    shinysdr --create ${__CONFIG}
+  debug "starting linuxcnc"
+  /opt/linuxcnc/scripts/linuxcnc
 }
 
 # print help
@@ -66,28 +47,20 @@ usage: ${SOURCE} [options] command <config>
   options:
 
     -d|--debug   : Print addition details to help solve problems
-
-    -f|--force   : Creates a new config over an existing config
-
-    -i|--init    : Create a new config
       
   comands:
 
-    start        : start ShinySDR
+    start        : start LinuxCNC
 
-    stop         : stop ShinySDR
-
-    init         : init ShinySDR (Same as -i/--init) but as a standalone step
-
-  config: specifies the location of the ShinySDR config, defaults to '/config'
+    stop         : stop LinuxCNC
 
 example:
 
-  shinysdr-entrypoint.sh -d -i start /my-config
+  linuxcnc-entrypoint.sh -d start
 
 docker-example:
 
-  docker run --rm -it jeffersonjhunt/shinysdr -d -i start /conifg/my-config
+  docker run --rm -it jeffersonjhunt/linuxcnc -d start
 
 See README.md for more details and examples
 
@@ -122,20 +95,7 @@ while [[ $# -gt 0 ]]; do
         -d|--debug)
           __DEBUG=1
         ;;
-        # use force
-        -f|--force)
-          __FORCE=1
-        ;;
-        # create config
-        -i|--init)
-          __INIT=1
-        ;;
         # Commands
-        init)
-          shift
-          init $@
-          exit
-        ;;
         start)
           shift
           start $@
