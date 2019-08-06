@@ -1,0 +1,2 @@
+# never add CRLF to shell files!
+*.sh text=lf
