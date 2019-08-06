@@ -52,7 +52,7 @@ WORKDIR /opt
 
 # Add modules/plugins
 
-# Build and install ShinySDR
+# Build and install LinuxCNC
 RUN git clone https://github.com/LinuxCNC/linuxcnc.git && \
   cd linuxcnc/debian && \
   ./configure uspace && \
@@ -62,16 +62,17 @@ RUN git clone https://github.com/LinuxCNC/linuxcnc.git && \
   make
 
 # Clean up APT when done.
-#RUN apt-get purge -y \
-#      git \
-#      build-essential \
-#      cmake \
-#      cmake-data \
-#      pkg-config \
-#      curl && \
-#  apt-get autoclean -y && \
-#  apt-get autoremove -y && \
-#  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get purge -y \
+      git \
+      build-essential \
+      pkg-config \
+      curl \
+      autogen \
+      autoconf \
+      curl && \
+  apt-get autoclean -y && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add mgmt scripts
 COPY linuxcnc-entrypoint.sh /usr/local/bin/linuxcnc-entrypoint.sh
