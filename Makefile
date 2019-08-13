@@ -40,6 +40,7 @@ manifest: push
 	done
 
 %/push:
+	docker login
 	docker push jeffersonjhunt/linuxcnc:$(os)-$(arch)-$(version)
 
 push: squash
@@ -48,6 +49,7 @@ push: squash
 	done
 
 publish: manifest
+	docker login
 	docker manifest push --purge jeffersonjhunt/linuxcnc:$(version)
 	docker manifest push --purge jeffersonjhunt/linuxcnc:latest
 

@@ -44,7 +44,7 @@ RUN apt-get install -y \
       libxmu-dev \
       python-yapps \
       yapps2 && \
-  curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
+  curl -k https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
   python /tmp/get-pip.py && \
   pip install --upgrade pip
 
