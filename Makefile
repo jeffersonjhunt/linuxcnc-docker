@@ -81,3 +81,4 @@ quick: linux/amd64/build linux/amd64/run
 	  jeffersonjhunt/linuxcnc:$(os)-$(arch)-$(version)
 
 debug: linux/amd64/debug
+
