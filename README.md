@@ -6,8 +6,8 @@ This document covers the current state of the Docker built image. It enumerates 
 
 See [RELEASE.md](https://github.com/jeffersonjhunt/linuxcnc-docker/blob/master/RELEASE.md "RELEASE.md") for more details.
 
-* v1.0.0 - 
-    * [Dockerfile](https://github.com/jeffersonjhunt/linuxcnc-docker/blob/v1.0.0/Dockerfile "Dockerfile")
+* v1.1.0 - 
+    * [Dockerfile](https://github.com/jeffersonjhunt/linuxcnc-docker/blob/v1.1.0/Dockerfile "Dockerfile")
     * [Docker Image](https://hub.docker.com/r/jeffersonjhunt/linuxcnc "Docker Image")
 
 ## Basics

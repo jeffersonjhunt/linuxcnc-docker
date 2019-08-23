@@ -6,7 +6,7 @@ arch = $(word 2, $(subst /, ,$@))
 XSOCK := /tmp/.X11-unix/X0
 DISPLAY := :0
 
-version = v1.0.0
+version = v1.1.0
 
 BUILD_NUMBER_FILE = .BUILD_NUMBER
 

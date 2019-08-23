@@ -1,7 +1,7 @@
 # Supported tags and respective Dockerfile links
 
 * [latest](https://github.com/jeffersonjhunt/linuxcnc-docker/blob/master/Dockerfile "Dockerfile")
-* [v1.0.0](https://github.com/jeffersonjhunt/linuxcnc-docker/blob/v1.0.0/Dockerfile "Dockerfile")
+* [v1.1.0](https://github.com/jeffersonjhunt/linuxcnc-docker/blob/v1.1.0/Dockerfile "Dockerfile")
 
 # Quick reference
 
