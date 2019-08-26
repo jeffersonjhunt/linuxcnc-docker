@@ -7,3 +7,31 @@ BUILD_NUMBER_LDFLAGS += -Xlinker --defsym -Xlinker __BUILD_NUMBER=$$(cat $(BUILD
 $(BUILD_NUMBER_FILE): $(OBJECTS)
 	@if ! test -f $(BUILD_NUMBER_FILE); then echo 999 > $(BUILD_NUMBER_FILE); fi
 	@echo $$(($$(cat $(BUILD_NUMBER_FILE)) + 1)) > $(BUILD_NUMBER_FILE)
+
+# Common build commands
+
+.PHONY: build squash manifest push quick debug 
+
+build:
+	for p in $(platforms); do \
+		$(MAKE) $$p/build; \
+	done
+
+squash:
+	for p in $(platforms); do \
+		$(MAKE) $$p/squash; \
+	done
+
+manifest: push
+	for p in $(platforms); do \
+		$(MAKE) $$p/manifest; \
+	done
+
+push: squash
+	for p in $(platforms); do \
+		$(MAKE) $$p/push; \
+	done
+
+quick: linux/amd64/build linux/amd64/run
+
+debug: linux/amd64/debug
