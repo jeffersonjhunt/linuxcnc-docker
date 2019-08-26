@@ -10,7 +10,7 @@ $(BUILD_NUMBER_FILE): $(OBJECTS)
 
 # Common build commands
 
-.PHONY: build squash manifest push quick debug 
+.PHONY: build squash manifest push quick debug tag
 
 build:
 	for p in $(platforms); do \
@@ -27,11 +27,17 @@ manifest: push
 		$(MAKE) $$p/manifest; \
 	done
 
-push: squash
+push: squash tag
 	for p in $(platforms); do \
 		$(MAKE) $$p/push; \
 	done
 
+	git push origin $(version).$$(cat $(BUILD_NUMBER_FILE))  
+
+tag:
+	git tag -a $(version).$$(cat $(BUILD_NUMBER_FILE)) -m "release $(version) build $$(cat $(BUILD_NUMBER_FILE))"
+
 quick: linux/amd64/build linux/amd64/run
 
 debug: linux/amd64/debug
+
